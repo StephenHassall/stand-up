@@ -1,0 +1,31 @@
+{
+  "name": "stand-up",
+  "version": "1.0.0",
+  "description": "Web site to get people sitting at their desks to stand up.",
+  "keywords": [
+    "desk",
+    "back",
+    "pain",
+    "stand",
+    "up",
+    "health"
+  ],
+  "homepage": "https://github.com/StephenHassall/stand-up#readme",
+  "bugs": {
+    "url": "https://github.com/StephenHassall/stand-up/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StephenHassall/stand-up.git"
+  },
+  "license": "UNLICENSED",
+  "author": "Stephen Paul Hassall",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

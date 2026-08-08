@@ -1,0 +1,88 @@
+.base {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-items: center;
+  gap: 16px;
+  padding: 2rem;
+  border-radius: 16px;
+  background-color: #f1f1f1;
+  box-shadow: 0 0 6px 0px lightgray;
+}
+
+/* Header */
+.header {
+  grid-column: 1 / span 2;
+  display: grid;
+  justify-self: stretch;
+  align-items: center;
+  padding-block-end: 8px;
+  border-block-end: 2px dashed lightgray;
+}
+
+.header h2 {
+  margin: 0;
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: center;
+}
+
+.header ui-icon-button {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: end;
+}
+
+.row {
+  grid-column: 1 / span 2;
+  display: grid;
+  grid-template-columns: subgrid;
+  align-items: center;
+}
+
+.timer-type-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: stretch;
+  gap: 8px;
+}
+
+.switch-group {
+  grid-column: 1 / span 2;
+  display: grid;
+  grid-template-columns: subgrid;
+  gap: 8px;
+}
+
+.fixed-group {
+  grid-column: 1 / span 2;
+  display: grid;
+  grid-template-columns: subgrid;
+  gap: 8px;
+}
+
+.fixed-group .add-time {
+  justify-self: start;
+}
+
+.time-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.base[switch] .fixed-group {
+  display: none;
+}
+
+.base[fixed] .switch-group {
+  display: none;
+}
+
+.base[switch] #timer-fixed > ui-icon-check {
+  display: none;
+}
+
+.base[fixed] #timer-switch > ui-icon-check {
+  display: none;
+}

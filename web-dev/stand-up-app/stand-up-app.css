@@ -1,0 +1,47 @@
+.base {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+}
+
+.views {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+}
+
+stand-up-view {
+  justify-self: center;
+  width: 80vw;
+  max-width: 800px;
+  min-width: 400px;
+  align-self: center;
+}
+
+stand-up-settings {
+  justify-self: center;
+  max-width: 800px;
+  min-width: 400px;
+  align-self: center;
+}
+
+stand-up-view, stand-up-settings {
+  display: none;
+}
+
+stand-up-view[active] {
+  display: block;
+}
+
+stand-up-settings[active] {
+  display: block;
+}
+
+#settings {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+}
+

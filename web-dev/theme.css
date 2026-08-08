@@ -1,0 +1,127 @@
+/* By Stephen Paul Hassall (web: https://coderundebug.com) */
+:root, :host {
+  /* Allow light mode */
+  color-scheme: light;
+
+  /* Color */
+  --ui-background: hsl(0 0% 97% / 1);
+  --ui-midground: hsl(0 0% 90% / 1);
+  --ui-foreground: hsl(0 0% 18% / 1);  
+
+  /* Border */
+  --ui-border-radius-small: 3px;
+  --ui-border-radius-normal: 4px;
+  --ui-border-radius-large: 6px;
+  --ui-border-width: 1px;
+  --ui-border-style: solid;
+  --ui-border-box-shadow: none;
+
+  /* Font */
+  --ui-font-size-small: 14px;
+  --ui-font-size-normal: 16px;
+  --ui-font-size-large: 24px;
+  --ui-font-weight-normal: normal;
+  --ui-font-weight-bold: 600;
+
+  /* Animation duration */
+  --ui-animation-duration-slow: 400ms;
+  --ui-animation-duration-default: 200ms;
+  --ui-animation-duration-quick: 100ms;
+
+  --light-color-text: hsl(0 0% 18% / 1);
+  --light-color-background: hsl(0 0% 97% / 1);
+  --dark-color-text: hsl(0 0% 97% / 1);
+  --dark-color-background: hsl(0 0% 18% / 1);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion) {
+  :root, :host {
+    /* Animation duration */
+    --ui-animation-duration-slow: 0;
+    --ui-animation-duration-default: 0;
+    --ui-animation-duration-quick: 0;
+  }
+}
+
+/* High contrast */
+@media (forced-colors: active) or (prefers-contrast: more) {
+  :root, :host {
+    /* Border */
+    --ui-border-radius: 0;
+    --ui-border-width: 3px;
+    --ui-border-style: solid;
+
+    /* Colors */
+    --ui-module-background: var(--ui-background);
+    --ui-module-foreground: var(--ui-foreground);
+    --ui-default-background: var(--ui-background);
+    --ui-default-foreground: var(--ui-foreground);
+    --ui-selected-background: var(--ui-background);
+    --ui-selected-foreground: var(--ui-foreground);
+    --ui-success-background: var(--ui-background);
+    --ui-success-foreground: var(--ui-foreground);
+    --ui-warning-background: var(--ui-background);
+    --ui-warning-foreground: var(--ui-foreground);
+    --ui-danger-background: var(--ui-background);
+    --ui-danger-foreground: var(--ui-foreground);
+    --ui-info-background: var(--ui-background);
+    --ui-info-foreground: var(--ui-foreground);
+    --ui-highlight-background: var(--ui-background);
+    --ui-highlight-foreground: var(--ui-foreground);
+
+    /* Module */
+    --ui-module-border-style: solid;
+    --ui-module-border-width: 3px;
+    --ui-module-border-color: var(--ui-foreground);
+    --ui-module-shadow: none;
+  }
+}
+
+@media ((forced-colors: active) or (prefers-contrast: more)) and (prefers-color-scheme: light) {
+  :root, :host {
+    /* Colors */
+    --ui-background: white;
+    --ui-midground: white;
+    --ui-foreground: black;
+  }
+}
+
+@media ((forced-colors: active) or (prefers-contrast: more)) and (prefers-color-scheme: dark) {
+  :root, :host {
+    /* Colors */
+    --ui-background: black;
+    --ui-midground: black;
+    --ui-foreground: white;
+  }
+}
+
+/* Hide UI components until they are loaded */
+*:not(:defined) {
+  display: none;
+}
+::slotted(*:not(:defined)) {
+  display: none;
+}
+
+/* Default body properties */
+body, :host {
+  /* Background and color */
+  background-color: var(--ui-background);
+  color: var(--ui-foreground);
+  --ui-icon-primary-color: var(--ui-foreground);
+
+  /* Text */
+  font-family:
+    SFMono-Medium,
+    "SF Mono",
+    "Segoe UI Mono",
+    "Roboto Mono",
+    "Ubuntu Mono",
+    Menlo,
+    Consolas,
+    'Courier New',
+    Courier,
+    monospace;
+  font-size: var(--ui-font-size-normal);
+}

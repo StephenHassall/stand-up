@@ -1,0 +1,69 @@
+.base {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 16px;
+  padding: 2rem;
+  border-radius: 16px;
+  background-color: #f1f1f1;
+  box-shadow: 0 0 6px 0px lightgray;
+}
+
+/* Time */
+.time {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+
+.time[no-hour] {
+  grid-template-columns: 1fr 1fr;
+}
+
+.time[no-hour] .hour-block {
+  display: none;
+}
+
+.hour-block, .minute-block, .second-block {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+}
+
+#hour, #minute, #second {
+  font-size: 5rem;
+}
+
+.label {
+  font-size: 1.5rem;
+}
+
+/* Progress */
+#progress {
+  height: 2rem;
+  width: 100%;
+  background-color: lightgray;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#progress-done {
+  height: 100%;
+  width: 40%;
+  background-color: gray;
+}
+
+/* Status */
+#status {
+  font-size: 3rem;
+}
+
+/* Phone */
+@media (max-width: 40rem) {
+  .base {
+    padding: 1rem;
+    border-radius: none;
+    background-color: inherit;
+    box-shadow: none;
+  }
+}
