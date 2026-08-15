@@ -155,7 +155,7 @@ export default class TestStandUpControl {
         // Set stand up data
         StandUpData.timerType = 1;
         StandUpData.standTime = 120;
-        StandUpData.fixedStandList = [
+        StandUpData.sortedFixedStandList = [
             new Date(2000,0,1,18,0,0)
         ];
         StandUpData.standing = false;
@@ -302,7 +302,7 @@ export default class TestStandUpControl {
         // Set stand up data
         StandUpData.timerType = 1;
         StandUpData.standTime = 60;
-        StandUpData.fixedStandList = [
+        StandUpData.sortedFixedStandList = [
             new Date(2000,0,1,6,0,0),
             new Date(2000,0,1,19,0,0)
         ];
@@ -587,7 +587,7 @@ export default class TestStandUpControl {
         // Set stand up data
         StandUpData.timerType = 1;
         StandUpData.standTime = 120;
-        StandUpData.fixedStandList = [
+        StandUpData.sortedFixedStandList = [
             new Date(2000,0,1,18,0,0)
         ];
         StandUpData.standing = true;
@@ -662,7 +662,7 @@ export default class TestStandUpControl {
         // Set stand up data
         StandUpData.timerType = 1;
         StandUpData.standTime = 60;
-        StandUpData.fixedStandList = [
+        StandUpData.sortedFixedStandList = [
             new Date(2000,0,1,6,0,0),
             new Date(2000,0,1,19,0,0)
         ];

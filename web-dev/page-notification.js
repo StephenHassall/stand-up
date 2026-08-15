@@ -20,6 +20,9 @@ export class PageNotification {
      * Switch event.
      */
     static _switchEvent() {
+        // If currently not using notifications (maybe we are settings)
+        if (StandUpData.useNotifications === false) return;
+        
         // If not used
         if (StandUpData.usePageNotifications === false) return;
 
@@ -29,7 +32,7 @@ export class PageNotification {
             UiToast.addAlert(
                 'success',
                 'STAND UP',
-                'It is time to stand up.',
+                'It\'s time to stand up.',
                 'ui-icon-arrow-up'
             );
         }
@@ -40,7 +43,7 @@ export class PageNotification {
             UiToast.addAlert(
                 'default',
                 'SIT DOWN',
-                'It is time to sit back down.',
+                'It\'s time to sit back down.',
                 'ui-icon-arrow-down',
                 false,
                 5000,

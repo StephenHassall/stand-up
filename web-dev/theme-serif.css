@@ -1,0 +1,225 @@
+/* Theme serif */
+:root, :host {
+  /* Only allow light mode */
+  color-scheme: light;
+
+  /* Custom CSS */
+  --standup-inside-background: rgb(242, 223, 206);
+  --standup-border: 3px dotted #919182;
+  --standup-border-radius: 0;
+  --standup-box-shadow: none;
+  --standup-header-bar: 3px dotted #919182;
+  --standup-progress: #9dbbd5;
+  --standup-progress-done: #578093;
+  --standup-time-text-color: #0d7680;
+  --standup-time-text-font-size: 5rem;
+  --standup-time-label-color: #578093;
+  --standup-time-label-font-size: 1.5rem;
+  --standup-status-color: #0d7680;
+  --standup-status-font-size: 3rem;
+
+  /* Border */
+  --ui-border-radius-small: 0;
+  --ui-border-radius-normal: 0;
+  --ui-border-radius-large: 0;
+  --ui-border-width: 3px;
+  --ui-border-style: dotted;
+
+  /* Font */
+  --ui-font-size-small: 16px;
+  --ui-font-size-normal: 18px;
+  --ui-font-size-large: 20px;
+  --ui-font-weight-normal: normal;
+  --ui-font-weight-bold: 600;
+
+  /* Animation duration */
+  --ui-animation-duration-slow: 400ms;
+  --ui-animation-duration-default: 200ms;
+  --ui-animation-duration-quick: 100ms;
+
+  /* Colors */
+  --ui-background: rgb(255, 241, 229);
+  --ui-midground: rgb(242, 223, 206);
+  --ui-foreground: rgb(51, 48, 46);
+  --ui-default-background: rgb(252, 208, 177);
+  --ui-default-foreground: rgb(38, 42, 51);
+  --ui-selected-background: rgb(255, 255, 255);
+  --ui-selected-foreground: rgb(13, 118, 128);
+  --ui-success-background: hsl(104 50% 90% / 1);
+  --ui-success-foreground: hsl(104 50% 30% / 1);
+  --ui-warning-background: hsl(45 50% 90% / 1);
+  --ui-warning-foreground: hsl(45 50% 30% / 1);
+  --ui-danger-background: hsl(0 50% 90% / 1);
+  --ui-danger-foreground: hsl(0 50% 30% / 1);
+  --ui-info-background: hsl(190 50% 90% / 1);
+  --ui-info-foreground: hsl(190 90% 30% / 1);
+  --ui-highlight-background: hsl(302 50% 90% / 1);
+  --ui-highlight-foreground: hsl(302 50% 30% / 1);
+
+  /* Module */
+  --ui-module-background: #f2dfce;
+  --ui-module-foreground: rgb(0, 0, 0);
+  --ui-module-backdrop: rgba(242, 223, 206, 0.6);
+  --ui-module-border-style: none;
+  --ui-module-border-width: 0;
+  --ui-module-border-color: transparent;
+  --ui-module-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.4);
+
+  /* Code */
+  --ui-code-foreground: black;
+  --ui-code-background: rgb(228, 204, 184);
+
+  /* HTML */
+  --ui-code-html-comment: #008000;
+  --ui-code-html-tag-bracket: #900000;
+  --ui-code-html-tag-name: #900000;
+  --ui-code-html-attribute: #e50000;
+  --ui-code-html-value: #0000ff;
+
+  /* CSS */
+  --ui-code-css-comment: #008000;
+  --ui-code-css-class: #900000;
+  --ui-code-css-id: #900000;
+  --ui-code-css-tag: #900000;
+  --ui-code-css-attribute: #e50000;
+  --ui-code-css-text: #a31515;
+  --ui-code-css-function: #a45e26;
+  --ui-code-css-property: #e50000;
+  --ui-code-css-value: #0451a5;
+  --ui-code-css-variable: #098658;
+  --ui-code-css-constant: #0451a5;
+
+  /* JavaScript */
+  --ui-code-javascript-comment: #008000;
+  --ui-code-javascript-keyword: #0000ff;
+  --ui-code-javascript-declaration: #b700db;
+  --ui-code-javascript-property: #001080;
+  --ui-code-javascript-class: #267f99;
+  --ui-code-javascript-function: #795e26;
+  --ui-code-javascript-text: #a31515;
+  --ui-code-javascript-numeric: #098658;
+
+  /* SQL */
+  --ui-code-sql-comment: #008000;
+  --ui-code-sql-command: #0000ff;
+  --ui-code-sql-text: #ac1515;
+  --ui-code-sql-numeric: #098658;
+  --ui-code-sql-identifier: #3b3b3b;
+  --ui-code-sql-constant: #098658;
+  --ui-code-sql-operator: #000000;
+
+  /* JSON */
+  --ui-code-json-property: #0451a5;
+  --ui-code-json-text: #a31515;
+  --ui-code-json-literal: #098658;
+  --ui-code-json-constant: #0000ff;
+  --ui-code-json-colon: #3b3b3b;
+  --ui-code-json-comma: #3b3b3b;
+  --ui-code-json-curly-brackets: #3b3b3b;
+  --ui-code-json-square-brackets: #3b3b3b;
+
+  /* Table border */
+  --ui-table-box-style: solid;
+  --ui-table-box-width: 1px;
+  --ui-table-column-bar-highlight: rgb(13, 118, 128);
+  --ui-table-column-bar-selected: rgb(13, 118, 128);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion) {
+  :root, :host {
+    /* Animation duration */
+    --ui-animation-duration-slow: 0;
+    --ui-animation-duration-default: 0;
+    --ui-animation-duration-quick: 0;
+  }
+}
+
+/* High contrast */
+@media (forced-colors: active) or (prefers-contrast: more) {
+  :root, :host {
+    /* Border */
+    --ui-border-radius: 0;
+    --ui-border-width: 3px;
+    --ui-border-style: solid;
+
+    /* Colors */
+    --ui-module-background: var(--ui-background);
+    --ui-module-foreground: var(--ui-foreground);
+    --ui-default-background: var(--ui-background);
+    --ui-default-foreground: var(--ui-foreground);
+    --ui-selected-background: var(--ui-background);
+    --ui-selected-foreground: var(--ui-foreground);
+    --ui-success-background: var(--ui-background);
+    --ui-success-foreground: var(--ui-foreground);
+    --ui-warning-background: var(--ui-background);
+    --ui-warning-foreground: var(--ui-foreground);
+    --ui-danger-background: var(--ui-background);
+    --ui-danger-foreground: var(--ui-foreground);
+    --ui-info-background: var(--ui-background);
+    --ui-info-foreground: var(--ui-foreground);
+    --ui-highlight-background: var(--ui-background);
+    --ui-highlight-foreground: var(--ui-foreground);
+
+    /* Module */
+    --ui-module-border-style: solid;
+    --ui-module-border-width: 3px;
+    --ui-module-border-color: var(--ui-foreground);
+    --ui-module-shadow: none;
+  }
+}
+
+@media ((forced-colors: active) or (prefers-contrast: more)) and (prefers-color-scheme: light) {
+  :root, :host {
+    /* Colors */
+    --ui-background: white;
+    --ui-midground: white;
+    --ui-foreground: black;
+  }
+}
+
+@media ((forced-colors: active) or (prefers-contrast: more)) and (prefers-color-scheme: dark) {
+  :root, :host {
+    /* Colors */
+    --ui-background: black;
+    --ui-midground: black;
+    --ui-foreground: white;
+  }
+}
+
+/* Hide UI components until they are loaded */
+*:not(:defined) {
+  display: none;
+}
+
+::slotted(*:not(:defined)) {
+  display: none;
+}
+
+/* Default body properties */
+body, :host {
+  /* Background and color */
+  background-color: var(--ui-background);
+  color: var(--ui-foreground);
+  --ui-icon-primary-color: var(--ui-foreground);
+
+  /* Text */
+  font-family: Georgia, serif;
+  font-size: var(--ui-font-size-normal);
+}
+
+/* Scroll bars */
+@supports (scrollbar-color: auto) {
+  * {
+    scrollbar-color: rgb(13, 118, 128) rgb(242, 223, 206);
+  }
+}
+
+@supports selector(::-webkit-scrollbar) {
+  *::-webkit-scrollbar {
+    background: rgb(13, 118, 128);
+  }
+  *::-webkit-scrollbar-thumb {
+    background: rgb(242, 223, 206);
+  }
+}

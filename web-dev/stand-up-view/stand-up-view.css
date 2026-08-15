@@ -4,9 +4,11 @@
   justify-items: center;
   gap: 16px;
   padding: 2rem;
-  border-radius: 16px;
-  background-color: #f1f1f1;
-  box-shadow: 0 0 6px 0px lightgray;
+  border-radius: var(--standup-border-radius);
+  border: var(--standup-border);
+  background-color: var(--standup-inside-background);
+  box-shadow: var(--standup-box-shadow);
+  user-select: none;
 }
 
 /* Time */
@@ -31,18 +33,20 @@
 }
 
 #hour, #minute, #second {
-  font-size: 5rem;
+  font-size: var(--standup-time-text-font-size);
+  color: var(--standup-time-text-color);
 }
 
 .label {
-  font-size: 1.5rem;
+  font-size: var(--standup-time-label-font-size);
+  color: var(--standup-time-label-color);
 }
 
 /* Progress */
 #progress {
   height: 2rem;
   width: 100%;
-  background-color: lightgray;
+  background-color: var(--standup-progress);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -50,19 +54,27 @@
 #progress-done {
   height: 100%;
   width: 40%;
-  background-color: gray;
+  background-color: var(--standup-progress-done);
 }
 
 /* Status */
 #status {
-  font-size: 3rem;
+  font-size: var(--standup-status-font-size);
+  color: var(--standup-status-color);
+}
+
+#switch-buttons {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: auto auto;
 }
 
 /* Phone */
 @media (max-width: 40rem) {
   .base {
     padding: 1rem;
-    border-radius: none;
+    border-radius: 0;
+    border: none;
     background-color: inherit;
     box-shadow: none;
   }

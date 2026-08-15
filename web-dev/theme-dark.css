@@ -1,12 +1,22 @@
-/* By Stephen Paul Hassall (web: https://coderundebug.com) */
+/* Theme dark */
 :root, :host {
-  /* Allow light mode */
-  color-scheme: light;
+  /* Only allow dark mode */
+  color-scheme: dark;
 
-  /* Color */
-  --ui-background: hsl(0 0% 97% / 1);
-  --ui-midground: hsl(0 0% 90% / 1);
-  --ui-foreground: hsl(0 0% 18% / 1);  
+  /* Custom CSS */
+  --standup-inside-background: #161616;
+  --standup-border: none;
+  --standup-border-radius: 16px;
+  --standup-box-shadow: 0 0 6px 0px #808080;
+  --standup-header-bar: 2px dashed #7b7b7b;
+  --standup-progress: lightgray;
+  --standup-progress-done: gray;
+  --standup-time-text-color: #f7f7f7;
+  --standup-time-text-font-size: 5rem;
+  --standup-time-label-color: #f7f7f7;
+  --standup-time-label-font-size: 1.5rem;
+  --standup-status-color: #f7f7f7;
+  --standup-status-font-size: 3rem;
 
   /* Border */
   --ui-border-radius-small: 3px;
@@ -14,34 +24,41 @@
   --ui-border-radius-large: 6px;
   --ui-border-width: 1px;
   --ui-border-style: solid;
-  --ui-border-box-shadow: none;
 
   /* Font */
-  --ui-font-size-small: 14px;
+  --ui-font-size-small: 12px;
   --ui-font-size-normal: 16px;
   --ui-font-size-large: 24px;
   --ui-font-weight-normal: normal;
   --ui-font-weight-bold: 600;
 
-  /* Animation duration */
-  --ui-animation-duration-slow: 400ms;
-  --ui-animation-duration-default: 200ms;
-  --ui-animation-duration-quick: 100ms;
+  /* Colors */
+  --ui-background: hsl(0 0% 18% / 1);
+  --ui-midground: hsl(0 0% 25% / 1);
+  --ui-foreground: hsl(0 0% 97% / 1);
+  --ui-default-background: hsl(0 0% 30% / 1);
+  --ui-default-foreground: hsl(0 0% 90% / 1);
+  --ui-selected-background: hsl(215 50% 30% / 1);
+  --ui-selected-foreground: hsl(215 50% 90% / 1);
+  --ui-success-background: hsl(104 50% 30% / 1);
+  --ui-success-foreground: hsl(104 50% 90% / 1);  
+  --ui-warning-background: hsl(45 50% 30% / 1);
+  --ui-warning-foreground: hsl(45 50% 90% / 1);
+  --ui-danger-background: hsl(0 50% 30% / 1);
+  --ui-danger-foreground: hsl(0 50% 90% / 1);
+  --ui-info-background: hsl(190 90% 30% / 1);
+  --ui-info-foreground: hsl(190 50% 90% / 1);
+  --ui-highlight-background: hsl(302 50% 30% / 1);
+  --ui-highlight-foreground: hsl(302 50% 90% / 1);
 
-  --light-color-text: hsl(0 0% 18% / 1);
-  --light-color-background: hsl(0 0% 97% / 1);
-  --dark-color-text: hsl(0 0% 97% / 1);
-  --dark-color-background: hsl(0 0% 18% / 1);
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion) {
-  :root, :host {
-    /* Animation duration */
-    --ui-animation-duration-slow: 0;
-    --ui-animation-duration-default: 0;
-    --ui-animation-duration-quick: 0;
-  }
+  /* Module */
+  --ui-module-background: hsl(0 0% 18% / 1);
+  --ui-module-foreground: hsl(0 0% 75% / 1);
+  --ui-module-backdrop: hsla(0, 0%, 25%, 0.25);
+  --ui-module-border-style: none;
+  --ui-module-border-width: 0;
+  --ui-module-border-color: transparent;
+  --ui-module-shadow: 0 0 3px 0 var(--ui-module-foreground);
 }
 
 /* High contrast */
@@ -69,12 +86,6 @@
     --ui-info-foreground: var(--ui-foreground);
     --ui-highlight-background: var(--ui-background);
     --ui-highlight-foreground: var(--ui-foreground);
-
-    /* Module */
-    --ui-module-border-style: solid;
-    --ui-module-border-width: 3px;
-    --ui-module-border-color: var(--ui-foreground);
-    --ui-module-shadow: none;
   }
 }
 
@@ -100,13 +111,14 @@
 *:not(:defined) {
   display: none;
 }
+
 ::slotted(*:not(:defined)) {
   display: none;
 }
 
 /* Default body properties */
 body, :host {
-  /* Background and color */
+  /* Backgroun and color */
   background-color: var(--ui-background);
   color: var(--ui-foreground);
   --ui-icon-primary-color: var(--ui-foreground);

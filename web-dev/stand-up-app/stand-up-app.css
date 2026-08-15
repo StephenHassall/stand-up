@@ -4,12 +4,21 @@
   display: grid;
   grid-template-columns: 1fr;
   justify-items: center;
+  overflow-y: auto;
 }
 
 .views {
   display: grid;
   grid-template-columns: 1fr;
   justify-items: center;
+}
+
+stand-up-welcome {
+  justify-self: center;
+  width: 80vw;
+  max-width: 800px;
+  min-width: 400px;
+  align-self: center;
 }
 
 stand-up-view {
@@ -27,8 +36,12 @@ stand-up-settings {
   align-self: center;
 }
 
-stand-up-view, stand-up-settings {
+stand-up-welcome, stand-up-view, stand-up-settings {
   display: none;
+}
+
+stand-up-welcome[active] {
+  display: block;
 }
 
 stand-up-view[active] {
@@ -39,9 +52,12 @@ stand-up-settings[active] {
   display: block;
 }
 
-#settings {
+.extra {
   position: fixed;
   bottom: 1rem;
   right: 1rem;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 8px;  
 }
 

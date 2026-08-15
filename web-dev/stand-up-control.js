@@ -23,8 +23,53 @@ export class StandUpControl {
      * Initialize the stand up control module.
      */
     static initialize() {
+        // If time type is fixed
+        if (StandUpData.timerType === 1) {
+            // Set now
+            const now = new Date();
+
+            // Check fixed without firing events. This is important because the old
+            // data from yesterday will have just been loaded, and the first check
+            // will see that a switch event needs firing, which will show notifications.
+            // So, when the page is shown for the first time on any given day, it would
+            // show notifications. Doing this stops that from happening.
+            StandUpControl._checkFixed(now, false);
+
+            // Workout the progress percentage
+            StandUpControl._workoutProgressPercentage(now);
+        }
+
         // Start the timer
         setInterval(StandUpControl._timerEvent, 250);
+    }
+
+    /**
+     * Reset the stand up control module. This is called when you change between switch/fixed.
+     */
+    static reset() {
+        // If time type is switch
+        if (StandUpData.timerType === 0) {
+            // Reset current times and standing state
+            StandUpData.currentSit = StandUpData.sitTime * 60;
+            StandUpData.currentStand = StandUpData.standTime * 60;
+            StandUpData.standing = false;
+            if (StandUpData.startStanding === true) StandUpData.standing = true;
+        }
+
+        // If time type is fixed
+        if (StandUpData.timerType === 1) {
+            // Set now
+            const now = new Date();
+
+            // Check fixed without firing events
+            StandUpControl._checkFixed(now, false);
+
+            // Workout the progress percentage
+            StandUpControl._workoutProgressPercentage(now);
+        }
+
+        // Set other parts
+        StandUpData.paused = false;
     }
 
     /**
@@ -88,16 +133,19 @@ export class StandUpControl {
         if (StandUpData.paused === true) return;
 
         // If timer type is switch
-        if (StandUpData.timerType === 0) StandUpControl._checkSwitch(now);
+        if (StandUpData.timerType === 0) StandUpControl._checkSwitch();
 
         // If time type is fixed
         if (StandUpData.timerType === 1) {
             // Check fixed
-            StandUpControl._checkFixed(now);
+            StandUpControl._checkFixed(now, true);
 
             // Workout the progress percentage
             StandUpControl._workoutProgressPercentage(now);
         }
+
+        // Save state
+        StandUpData.saveState();
     }
 
     /**
@@ -167,10 +215,11 @@ export class StandUpControl {
     /**
      * Check fixed changes.
      * @param {Date} now The date and time now to check against.
+     * @param {Boolean} fireEvents Should events be fired?
      */
-    static _checkFixed(now) {
+    static _checkFixed(now, fireEvents) {
         // If no fixed stand list
-        if (StandUpData.fixedStandList.length === 0) return;
+        if (StandUpData.sortedFixedStandList.length === 0) return;
 
         // Get now hour, minute and second
         const nowHour = now.getHours();
@@ -195,9 +244,9 @@ export class StandUpControl {
         let foundIndex = -1;
 
         // For each fixed stand time (this list is sorted)
-        for (let index = 0; index < StandUpData.fixedStandList.length; index++) {
+        for (let index = 0; index < StandUpData.sortedFixedStandList.length; index++) {
             // Get fixed stand
-            fixedStand = StandUpData.fixedStandList[index];
+            fixedStand = StandUpData.sortedFixedStandList[index];
 
             // Get hour, minute and second
             hour = fixedStand.getHours();
@@ -219,7 +268,7 @@ export class StandUpControl {
         // If nothing found then we are at the end of the day
         if (foundIndex === -1) {
             // Cycle back to the first
-            fixedStand = StandUpData.fixedStandList[0];
+            fixedStand = StandUpData.sortedFixedStandList[0];
 
             // Get hour, minute and second
             hour = fixedStand.getHours();
@@ -230,7 +279,7 @@ export class StandUpControl {
             totalSecond = (hour * 60 * 60) + (minute * 60) + second;
 
             // Set last fixed stand (which was the last one)
-            const lastFixedStand = StandUpData.fixedStandList[StandUpData.fixedStandList.length - 1];
+            const lastFixedStand = StandUpData.sortedFixedStandList[StandUpData.sortedFixedStandList.length - 1];
 
             // If currently standing
             if (StandUpData.standing === true) {
@@ -240,9 +289,12 @@ export class StandUpControl {
                 // Reset current times
                 StandUpData.currentSit = totalSecond + (24 * 60 * 60) - nowTotalSecond;
 
-                // Fire tick and switch events
-                StandUpControl._fireEvent('tick');
-                StandUpControl._fireEvent('switch');
+                // If we can fire events
+                if (fireEvents === true) {
+                    // Fire tick and switch events
+                    StandUpControl._fireEvent('tick');
+                    StandUpControl._fireEvent('switch');
+                }
             }
 
             // Else currently sitting
@@ -250,8 +302,11 @@ export class StandUpControl {
                 // Reset current times
                 StandUpData.currentSit = totalSecond + (24 * 60 * 60) - nowTotalSecond;
 
-                // Fire tick events
-                StandUpControl._fireEvent('tick');
+                // If we can fire events
+                if (fireEvents === true) {
+                    // Fire tick events
+                    StandUpControl._fireEvent('tick');
+                }
             }
 
             // Stop here
@@ -262,10 +317,10 @@ export class StandUpControl {
         let previousFixedStand = null;
         if (foundIndex !== 0) {
             // Get the one before the found index
-            previousFixedStand = StandUpData.fixedStandList[foundIndex - 1];
+            previousFixedStand = StandUpData.sortedFixedStandList[foundIndex - 1];
         } else {
             // The found one was the first in the list, therefore get the last one
-            previousFixedStand = StandUpData.fixedStandList[StandUpData.fixedStandList.length - 1];
+            previousFixedStand = StandUpData.sortedFixedStandList[StandUpData.sortedFixedStandList.length - 1];
         }
 
         // If currently standing
@@ -275,8 +330,11 @@ export class StandUpControl {
                 // Adjust the current
                 StandUpData.currentStand = (StandUpData.standTime * 60) - (nowTotalSecond - totalSecond);
 
-                // Fire tick event
-                StandUpControl._fireEvent('tick');
+                // If we can fire events
+                if (fireEvents === true) {
+                    // Fire tick event
+                    StandUpControl._fireEvent('tick');
+                }
             }
 
             // Else we are now sitting
@@ -287,9 +345,12 @@ export class StandUpControl {
                 // Reset current times
                 StandUpData.currentSit = totalSecond - nowTotalSecond;
 
-                // Fire tick and switch events
-                StandUpControl._fireEvent('tick');
-                StandUpControl._fireEvent('switch');
+                // If we can fire events
+                if (fireEvents === true) {
+                    // Fire tick and switch events
+                    StandUpControl._fireEvent('tick');
+                    StandUpControl._fireEvent('switch');
+                }
             }
         }
 
@@ -303,9 +364,12 @@ export class StandUpControl {
                 // Reset current times
                 StandUpData.currentStand = totalSecond - nowTotalSecond;
 
-                // Fire tick and switch events
-                StandUpControl._fireEvent('tick');
-                StandUpControl._fireEvent('switch');
+                // If we can fire events
+                if (fireEvents === true) {
+                    // Fire tick and switch events
+                    StandUpControl._fireEvent('tick');
+                    StandUpControl._fireEvent('switch');
+                }
             }
 
             // Else we are now sitting
@@ -313,8 +377,11 @@ export class StandUpControl {
                 // Adjust the current
                 StandUpData.currentSit = totalSecond - nowTotalSecond;
 
-                // Fire tick event
-                StandUpControl._fireEvent('tick');
+                // If we can fire events
+                if (fireEvents === true) {
+                    // Fire tick event
+                    StandUpControl._fireEvent('tick');
+                }
             }
         }
     }
@@ -358,7 +425,7 @@ export class StandUpControl {
         const standTimeSecond = StandUpData.standTime * 60;
 
         // If no fixed stand list exists then we can do nothing
-        if (StandUpData.fixedStandList.length === 0) return;
+        if (StandUpData.sortedFixedStandList.length === 0) return;
 
         // Get now hour, minute and second
         const nowHour = now.getHours();
@@ -371,9 +438,9 @@ export class StandUpControl {
         // The first check we need to make is to see if we are currently inside/standing
 
         // For each fixed stand time (this list is sorted)
-        for (let index = 0; index < StandUpData.fixedStandList.length; index++) {
+        for (let index = 0; index < StandUpData.sortedFixedStandList.length; index++) {
             // Get fixed stand
-            const fixedStand = StandUpData.fixedStandList[index];
+            const fixedStand = StandUpData.sortedFixedStandList[index];
 
             // Get hour, minute and second
             const hour = fixedStand.getHours();
@@ -399,8 +466,8 @@ export class StandUpControl {
         }
 
         // Get the first and the last fixed stands
-        const firstFixedStand = StandUpData.fixedStandList[0];
-        const lastFixedStand = StandUpData.fixedStandList[StandUpData.fixedStandList.length - 1];
+        const firstFixedStand = StandUpData.sortedFixedStandList[0];
+        const lastFixedStand = StandUpData.sortedFixedStandList[StandUpData.sortedFixedStandList.length - 1];
 
         // Set hour, minute, second for first and last fixed stand
         const firstHour = firstFixedStand.getHours();
@@ -415,7 +482,7 @@ export class StandUpControl {
         const lastTotalSeconds = (lastHour * 60 * 60) + (lastMinute * 60) + lastSecond;
 
         // If there is only one fixed stand
-        if (StandUpData.fixedStandList.length === 1) {
+        if (StandUpData.sortedFixedStandList.length === 1) {
             // If inside
             if (nowTotalSecond > firstTotalSeconds &&
                 nowTotalSecond < firstTotalSeconds + StandUpData.standTime) {
@@ -493,9 +560,9 @@ export class StandUpControl {
         let afterFixedStand = null;
 
         // For each fixed stand time (this list is sorted)
-        for (let index = 0; index < StandUpData.fixedStandList.length; index++) {
+        for (let index = 0; index < StandUpData.sortedFixedStandList.length; index++) {
             // Get fixed stand
-            const fixedStand = StandUpData.fixedStandList[index];
+            const fixedStand = StandUpData.sortedFixedStandList[index];
 
             // Get hour, minute and second
             const hour = fixedStand.getHours();

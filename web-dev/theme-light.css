@@ -1,0 +1,139 @@
+/* Theme light */
+:root, :host {
+  /* Allow light mode */
+  color-scheme: light;
+
+  /* Custom CSS */
+  --standup-inside-background: #f1f1f1;
+  --standup-border: none;
+  --standup-border-radius: 16px;
+  --standup-box-shadow: 0 0 6px 0px lightgray;
+  --standup-header-bar: 2px dashed #7b7b7b;
+  --standup-progress: lightgray;
+  --standup-progress-done: gray;
+  --standup-time-text-color: #2e2e2e;
+  --standup-time-text-font-size: 5rem;
+  --standup-time-label-color: #2e2e2e;
+  --standup-time-label-font-size: 1.5rem;
+  --standup-status-color: #2e2e2e;
+  --standup-status-font-size: 3rem;
+
+  /* Border */
+  --ui-border-radius-small: 3px;
+  --ui-border-radius-normal: 4px;
+  --ui-border-radius-large: 6px;
+  --ui-border-width: 1px;
+  --ui-border-style: solid;
+
+  /* Font */
+  --ui-font-size-small: 14px;
+  --ui-font-size-normal: 16px;
+  --ui-font-size-large: 24px;
+  --ui-font-weight-normal: normal;
+  --ui-font-weight-bold: 600;
+
+  /* Colors */
+  --ui-background: hsl(0 0% 97% / 1);
+  --ui-midground: hsl(0 0% 90% / 1);
+  --ui-foreground: hsl(0 0% 18% / 1);
+  --ui-default-background: hsl(0 0% 90% / 1);
+  --ui-default-foreground: hsl(0 0% 30% / 1);
+  --ui-selected-background: hsl(215 50% 90% / 1);
+  --ui-selected-foreground: hsl(215 50% 30% / 1);
+  --ui-success-background: hsl(104 50% 90% / 1);
+  --ui-success-foreground: hsl(104 50% 30% / 1);
+  --ui-warning-background: hsl(45 50% 90% / 1);
+  --ui-warning-foreground: hsl(45 50% 30% / 1);
+  --ui-danger-background: hsl(0 50% 90% / 1);
+  --ui-danger-foreground: hsl(0 50% 30% / 1);
+  --ui-info-background: hsl(190 50% 90% / 1);
+  --ui-info-foreground: hsl(190 90% 30% / 1);
+  --ui-highlight-background: hsl(302 50% 90% / 1);
+  --ui-highlight-foreground: hsl(302 50% 30% / 1);
+
+  /* Module */
+  --ui-module-background: hsl(0 0% 97% / 1);
+  --ui-module-foreground: hsl(0 0% 18% / 1);
+  --ui-module-backdrop: hsla(0, 0%, 97%, 0.25);
+  --ui-module-border-style: none;
+  --ui-module-border-width: 0;
+  --ui-module-border-color: transparent;
+  --ui-module-shadow: 0 1px 4px 0 rgb(from var(--ui-module-foreground, hsl(0 0% 18% / 1)) r g b / 50%);
+}
+
+/* High contrast */
+@media (forced-colors: active) or (prefers-contrast: more) {
+  :root, :host {
+    /* Border */
+    --ui-border-radius: 0;
+    --ui-border-width: 3px;
+    --ui-border-style: solid;
+
+    /* Colors */
+    --ui-module-background: var(--ui-background);
+    --ui-module-foreground: var(--ui-foreground);
+    --ui-default-background: var(--ui-background);
+    --ui-default-foreground: var(--ui-foreground);
+    --ui-selected-background: var(--ui-background);
+    --ui-selected-foreground: var(--ui-foreground);
+    --ui-success-background: var(--ui-background);
+    --ui-success-foreground: var(--ui-foreground);
+    --ui-warning-background: var(--ui-background);
+    --ui-warning-foreground: var(--ui-foreground);
+    --ui-danger-background: var(--ui-background);
+    --ui-danger-foreground: var(--ui-foreground);
+    --ui-info-background: var(--ui-background);
+    --ui-info-foreground: var(--ui-foreground);
+    --ui-highlight-background: var(--ui-background);
+    --ui-highlight-foreground: var(--ui-foreground);
+  }
+}
+
+@media ((forced-colors: active) or (prefers-contrast: more)) and (prefers-color-scheme: light) {
+  :root, :host {
+    /* Colors */
+    --ui-background: white;
+    --ui-midground: white;
+    --ui-foreground: black;
+  }
+}
+
+@media ((forced-colors: active) or (prefers-contrast: more)) and (prefers-color-scheme: dark) {
+  :root, :host {
+    /* Colors */
+    --ui-background: black;
+    --ui-midground: black;
+    --ui-foreground: white;
+  }
+}
+
+/* Hide UI components until they are loaded */
+*:not(:defined) {
+  display: none;
+}
+
+::slotted(*:not(:defined)) {
+  display: none;
+}
+
+/* Default body properties */
+body, :host {
+  /* Background and color */
+  background-color: var(--ui-background);
+  color: var(--ui-foreground);
+  --ui-icon-primary-color: var(--ui-foreground);
+
+  /* Text */
+  font-family:
+    SFMono-Medium,
+    "SF Mono",
+    "Segoe UI Mono",
+    "Roboto Mono",
+    "Ubuntu Mono",
+    Menlo,
+    Consolas,
+    'Courier New',
+    Courier,
+    monospace;
+  font-size: var(--ui-font-size-normal);
+}

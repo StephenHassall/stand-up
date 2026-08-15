@@ -1,44 +1,46 @@
 <div class="base">
   <div class="header">
     <h2>SETTINGS</h2>
-    <ui-icon-button blank>
+    <ui-icon-button id="close" blank>
       <ui-icon-cross></ui-icon-cross>
     </ui-icon-button>
   </div>
-  
 
-  <div class="row">
+  <div class="body">
 
-    <ui-label>Mode</ui-label>
+    <div class="row">
 
-    <div class="timer-type-group">
-      <ui-button fill-width id="timer-switch">
-        <ui-icon-check slot="start"></ui-icon-check>
-        SWITCH
-      </ui-button>
-      <ui-button fill-width id="timer-fixed">
-        <ui-icon-check slot="start"></ui-icon-check>
-        FIXED
-      </ui-button>
+      <ui-label>Mode</ui-label>
+
+      <div class="timer-type-group">
+        <ui-button fill-width id="timer-switch">
+          <ui-icon-check slot="start"></ui-icon-check>
+          SWITCH
+        </ui-button>
+        <ui-button fill-width id="timer-fixed">
+          <ui-icon-check slot="start"></ui-icon-check>
+          FIXED
+        </ui-button>
+      </div>
+
     </div>
 
-  </div>
-
-  <div class="switch-group">
-    <div class="row">
-      <ui-label for="sit-time">Sit Time</ui-label>
-      <ui-select id="sit-time">
-        <div value="5">5 Minutes</div>
-        <div value="10">10 Minutes</div>
-        <div value="15">15 Minutes</div>
-        <div value="20">20 Minutes</div>
-        <div value="25">25 Minutes</div>
-        <div value="30">30 Minutes</div>
-        <div value="40">40 Minutes</div>
-        <div value="45">45 Minutes</div>
-        <div value="60">60 Minutes</div>
-        <div value="120">120 Minutes</div>
-      </ui-select>
+    <div class="switch-group">
+      <div class="row">
+        <ui-label for="sit-time">Sit Time</ui-label>
+        <ui-select id="sit-time">
+          <div value="5">5 Minutes</div>
+          <div value="10">10 Minutes</div>
+          <div value="15">15 Minutes</div>
+          <div value="20">20 Minutes</div>
+          <div value="25">25 Minutes</div>
+          <div value="30">30 Minutes</div>
+          <div value="40">40 Minutes</div>
+          <div value="45">45 Minutes</div>
+          <div value="60">60 Minutes</div>
+          <div value="120">120 Minutes</div>
+        </ui-select>
+      </div>
     </div>
 
     <div class="row">
@@ -56,27 +58,34 @@
         <div value="10">10 Minutes</div>
       </ui-select>
     </div>
-  </div>
 
-  <div class="fixed-group"></div>
+    <div class="fixed-group"></div>
 
-  <div class="row">
-    <ui-label for="use-system-notifications"></ui-label>
-    <ui-checkbox>Use System Notifications?</ui-checkbox>
-  </div>
+    <div class="row start-standing-row">
+      <ui-label for="start-standing"></ui-label>
+      <ui-checkbox id="start-standing">Start Standing?</ui-checkbox>
+    </div>
 
-  <div class="row">
-    <ui-label for="use-page-notifications"></ui-label>
-    <ui-checkbox>Use Page Notifications?</ui-checkbox>
-  </div>
+    <div class="row use-system-notifications-row">
+      <ui-label for="use-system-notifications"></ui-label>
+      <ui-checkbox id="use-system-notifications">Use System Notifications?</ui-checkbox>
+    </div>
 
-  <div class="row">
-    <ui-label for="theme">Theme</ui-label>
-    <ui-select id="theme">
-      <div value="5">Dark</div>
-      <div value="10">Light</div>
-      <div value="15">Wooo</div>
-    </ui-select>
+    <div class="row">
+      <ui-label for="use-page-notifications"></ui-label>
+      <ui-checkbox id="use-page-notifications">Use Page Notifications?</ui-checkbox>
+    </div>
+
+    <div class="row">
+      <ui-label for="theme">Theme</ui-label>
+      <ui-select id="theme">
+        <div value="theme-dark">Dark</div>
+        <div value="theme-light">Light</div>
+        <div value="theme-serif">Serif</div>
+        <div value="theme-mono">Mono</div>
+      </ui-select>
+    </div>
+
   </div>
 
 </div>

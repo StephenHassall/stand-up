@@ -5,7 +5,6 @@ import { UiTools } from "/node_modules/@coderundebug/ui-web/ui-tools.js";
 import "/node_modules/@coderundebug/ui-web/ui-button.js";
 import { StandUpControl } from "../stand-up-control.js";
 import { StandUpData } from "../stand-up-data.js";
-import { SystemNotification } from "../system-notification.js";
 
 export class StandUpView extends HTMLElement {
     /**
@@ -32,6 +31,7 @@ export class StandUpView extends HTMLElement {
         this._hourElement = this.shadowRoot.getElementById('hour');
         this._minuteElement = this.shadowRoot.getElementById('minute');
         this._secondElement = this.shadowRoot.getElementById('second');
+        this._switchButtons = this.shadowRoot.getElementById('switch-buttons');
         this._pauseResumeElement = this.shadowRoot.getElementById('pause-resume');
         this._resetElement = this.shadowRoot.getElementById('reset');
         this._progressElement = this.shadowRoot.getElementById('progress');
@@ -55,14 +55,19 @@ export class StandUpView extends HTMLElement {
         StandUpControl.addEventListener('tick', this._tickEvent);
         StandUpControl.addEventListener('switch', this._switchEvent);
 
-        // Update the status
-        this._updateStatus();
+        // Update the switch buttons
+        this._updateSwitchButtons();
 
-        // Update timer
-        this._updateTimer();
+        // Set elements before the tick
+        this._hourElement.innerText = '00';
+        this._minuteElement.innerText = '00';
+        this._secondElement.innerText = '00';
+        this._timeBlockElement.setAttribute('no-hour', '');
+        this._progressDoneElement.style.width = '0%';
+        this._statusElement.innerText = '---';
 
-        // Update progress
-        this._updateProgress();
+        // Set status flag
+        this._setStatus = true;
     }
 
     /**
@@ -75,6 +80,23 @@ export class StandUpView extends HTMLElement {
         this._resetElement.removeEventListener('click', this._resetClickEvent);
         StandUpControl.removeEventListener('tick', this._tickEvent);
         StandUpControl.removeEventListener('switch', this._switchEvent);
+    }
+
+    /**
+     * Data updated. Call this when the settings have changed the data.
+     */
+    dataUpdated() {
+        // Update the switch buttons
+        this._updateSwitchButtons();
+
+        // Update timer
+        this._updateTimer();
+
+        // Update progress
+        this._updateProgress();
+
+        // Update status for the first time
+        this._updateStatus();
     }
 
     /**
@@ -108,6 +130,9 @@ export class StandUpView extends HTMLElement {
             StandUpData.currentSit = StandUpData.sitTime * 60;
         }
 
+        // Reset progress percentage
+        StandUpData.progressPercentage = 0;
+
         // Update timer
         this._updateTimer();
 
@@ -124,6 +149,15 @@ export class StandUpView extends HTMLElement {
 
         // Update progress
         this._updateProgress();
+
+        // If we need to set the status for the first time
+        if (this._setStatus === true) {
+            // Reset status flag
+            this._setStatus = false;
+
+            // Update status for the first time
+            this._updateStatus();
+        }
     }
 
     /**
@@ -138,6 +172,20 @@ export class StandUpView extends HTMLElement {
 
         // Update progress
         this._updateProgress();
+    }
+
+    /**
+     * Update switch buttons.
+     */
+    _updateSwitchButtons() {
+        // If timer type is fixed
+        if (StandUpData.timerType === 1) {
+            // Hide the switch buttons
+            this._switchButtons.style.display = 'none';
+        } else {
+            // Show the switch buttons
+            this._switchButtons.style.display = 'grid';
+        }
     }
 
     /**

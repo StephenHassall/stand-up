@@ -1,22 +1,18 @@
 .base {
-  display: grid;
-  grid-template-columns: auto auto;
-  justify-items: center;
-  gap: 16px;
-  padding: 2rem;
-  border-radius: 16px;
-  background-color: #f1f1f1;
-  box-shadow: 0 0 6px 0px lightgray;
+  border-radius: var(--standup-border-radius);
+  border: var(--standup-border);
+  background-color: var(--standup-inside-background);
+  box-shadow: var(--standup-box-shadow);
+  user-select: none;
 }
 
 /* Header */
 .header {
-  grid-column: 1 / span 2;
   display: grid;
   justify-self: stretch;
   align-items: center;
-  padding-block-end: 8px;
-  border-block-end: 2px dashed lightgray;
+  padding: 16px;
+  border-block-end: var(--standup-header-bar);
 }
 
 .header h2 {
@@ -30,6 +26,15 @@
   grid-column: 1;
   grid-row: 1;
   justify-self: end;
+}
+
+/* Body */
+.body {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-items: center;
+  gap: 16px;
+  padding: 2rem;
 }
 
 .row {
@@ -50,14 +55,14 @@
   grid-column: 1 / span 2;
   display: grid;
   grid-template-columns: subgrid;
-  gap: 8px;
+  row-gap: 8px;  
 }
 
 .fixed-group {
   grid-column: 1 / span 2;
   display: grid;
   grid-template-columns: subgrid;
-  gap: 8px;
+  row-gap: 8px;
 }
 
 .fixed-group .add-time {
@@ -85,4 +90,22 @@
 
 .base[fixed] #timer-switch > ui-icon-check {
   display: none;
+}
+
+.base[fixed] .start-standing-row {
+  display: none;
+}
+
+/* Phone */
+@media (max-width: 40rem) {
+  .base {
+    padding: 1rem;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+  }
+
+  .use-system-notifications-row {
+    display: none;
+  }
 }

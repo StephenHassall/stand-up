@@ -61,6 +61,9 @@ export class SystemNotification {
      * Switch event.
      */
     static _switchEvent() {
+        // If currently not using notifications (maybe we are settings)
+        if (StandUpData.useNotifications === false) return;
+
         // If not granted
         if (Notification.permission !== 'granted') return;
 
@@ -83,8 +86,9 @@ export class SystemNotification {
             SystemNotification._activeNotification = new Notification(
                 'Stand Up',
                 {
-                    body: 'It is time to stand up.',
+                    body: 'It\'s time to stand up.',
                     icon: 'stand-up-icon.png',
+                    renotify: true,
                     tag: tag
                 }
             );
@@ -96,8 +100,9 @@ export class SystemNotification {
             SystemNotification._activeNotification = new Notification(
                 'Sit Down',
                 {
-                    body: 'It is time to sit back down.',
+                    body: 'It\'s time to sit back down.',
                     icon: 'sit-down-icon.png',
+                    renotify: true,
                     tag: tag
                 }
             );
