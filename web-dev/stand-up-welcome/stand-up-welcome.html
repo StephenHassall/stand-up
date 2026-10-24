@@ -1,31 +1,53 @@
 <div class="base">
 
-  <h2>Welcome to Stand Up</h2>
+  <h2>Welcome to Stand Up Helper</h2>
 
   <p>
     Sitting at your desk all day?
     Is your back starting to complain?
     Do you need to be reminded to stand up?
-    Then this simply little web site is for you.
+    Then this simply little tool is for you.
   </p>
 
   <div class="phone">
-    This web site does not work on mobile phones.
-    It works great on desktop computers thought.
-    You should go and give it a try.
-  </div>
+    <div class="not-installed">
+      This tool only works on mobile phones if you install it first.
+      You'll get notifications when to stand up and when to sit
+      back down. Press the <ui-lozenge highlight>INSTALL</ui-lozenge>
+      button and then wait a second or two for it to do its thing.
+    </div>
 
-  <div class="desktop">
-    <div id="unknown">
+    <div id="phone-unknown">
       <p>
         If you want to receive system notifications to stand up then you will
         need to turn them on within the browser.
       </p>
 
-      <ui-button id="turn-on">Turn On</ui-button>
+      <ui-button id="phone-turn-on">Turn On</ui-button>
     </div>
 
-    <div id="denied">
+    <div id="phone-denied">
+      <p>
+        You have denied access to system notifications.
+        This tool cannot work correctly without them.
+        Before you can turn them on, you will need to use the browser
+        settings to reset permissions.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="desktop">
+    <div id="desktop-unknown">
+      <p>
+        If you want to receive system notifications to stand up then you will
+        need to turn them on within the browser.
+      </p>
+
+      <ui-button id="desktop-turn-on">Turn On</ui-button>
+    </div>
+
+    <div id="desktop-denied">
       <p>
         You have denied access to system notifications.
         This web site cannot work correctly without them.

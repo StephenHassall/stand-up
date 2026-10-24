@@ -99,7 +99,6 @@
 /* Phone */
 @media (max-width: 40rem) {
   .base {
-    padding: 1rem;
     border-radius: 0;
     border: none;
     box-shadow: none;

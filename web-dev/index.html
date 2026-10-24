@@ -9,6 +9,17 @@
   <meta name="robots" content="all">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <title>Stand Up</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Stand Up">
+  <link rel="apple-touch-icon" href="/icon-180.png">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f7f7f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#2e2e2e" media="(prefers-color-scheme: dark)">
+
   <script
     type="module"
     src="/node_modules/@coderundebug/ui-web/ui-theme-load.js"
@@ -20,5 +31,13 @@
 </head>
 <body>
   <stand-up-app></stand-up-app>
+<script>
+  // If service worker is something we can use
+  if ('serviceWorker' in navigator) {
+    // Register the service worker
+    navigator.serviceWorker.register('/sw.js');
+    //console.error('SERVICE WORKER MISSING');
+  }
+</script>
 </body>
 </html>

@@ -70,42 +70,25 @@ export class SystemNotification {
         // If not used
         if (StandUpData.useSystemNotifications === false) return;
 
-        // If existing 
-        if (SystemNotification._activeNotification) {
-            // Close the active notification
-            SystemNotification._activeNotification.close();
-            SystemNotification._activeNotification = null;
-        }
+        // If service worker is used
+        if ('serviceWorker' in navigator) {
+            // Wait for the service worker to be ready
+            navigator.serviceWorker.ready.then((registration) => {
+                // If the app is open, pass the notification request to the worker
+                if (registration.active) {
+                    // If switching to standing up
+                    if (StandUpData.standing === true) {
+                        // Set message to service worker
+                        registration.active.postMessage({ type: 'UP' });
+                    }
 
-        // Set tag
-        const tag = 'stand-up-notification_' + Date.now().toString();
-
-        // If switching to standing up
-        if (StandUpData.standing === true) {
-            // Create the new notification
-            SystemNotification._activeNotification = new Notification(
-                'Stand Up',
-                {
-                    body: 'It\'s time to stand up.',
-                    icon: 'stand-up-icon.png',
-                    renotify: true,
-                    tag: tag
+                    // If switching to sitting down
+                    if (StandUpData.standing === false) {
+                        // Set message to service worker
+                        registration.active.postMessage({ type: 'DOWN' });
+                    }
                 }
-            );
-        }
-
-        // If switching to sitting down
-        if (StandUpData.standing === false) {
-            // Create the new notification
-            SystemNotification._activeNotification = new Notification(
-                'Sit Down',
-                {
-                    body: 'It\'s time to sit back down.',
-                    icon: 'sit-down-icon.png',
-                    renotify: true,
-                    tag: tag
-                }
-            );
+            });        
         }
     }
 }

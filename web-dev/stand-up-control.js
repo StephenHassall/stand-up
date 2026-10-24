@@ -20,6 +20,11 @@ export class StandUpControl {
     static _secondsInDay = 24 * 60 * 60;
 
     /**
+     * Timer worker
+     */
+    static _timerWorker = null;
+
+    /**
      * Initialize the stand up control module.
      */
     static initialize() {
@@ -41,6 +46,12 @@ export class StandUpControl {
 
         // Start the timer
         setInterval(StandUpControl._timerEvent, 250);
+
+        // Start up the timer worker
+        StandUpControl._timerWorker = new Worker('timer-worker.js');
+
+        // Set message event
+        StandUpControl._timerWorker.addEventListener('message', StandUpControl._timerEvent);
     }
 
     /**

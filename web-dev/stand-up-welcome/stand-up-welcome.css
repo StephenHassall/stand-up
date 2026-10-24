@@ -14,14 +14,16 @@
 .phone {
   display: none;
   justify-items: center;
+  gap: 32px;
 }
 
 .desktop {
   display: grid;
   justify-items: center;
+  gap: 32px;
 }
 
-#unknown, #denied {
+#phone-unknown, #phone-denied, #desktop-unknown, #desktop-denied {
   display: grid;
   justify-items: center;
   gap: 32px;
@@ -40,12 +42,21 @@ p, h2 {
     background-color: inherit;
     box-shadow: none;
   }
-
+  
   .phone {
-    display: block;
+    display: grid;
   }
 
   .desktop {
     display: none;
   }
+
+  .base[installed] .not-installed {
+    display: none;
+  }
+
+  .base:not([installed]) #phone-unknown {
+    display: none !important;
+  }
+
 }

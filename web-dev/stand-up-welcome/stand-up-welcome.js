@@ -24,9 +24,13 @@ export class StandUpWelcome extends HTMLElement {
         this.shadowRoot.adoptedStyleSheets = [StandUpWelcome.uiCssStyleSheet];
 
         // Get elements
-        this._turnOnElement = this.shadowRoot.getElementById('turn-on');
-        this._unknownElement = this.shadowRoot.getElementById('unknown');
-        this._deniedElement = this.shadowRoot.getElementById('denied');
+        this._baseElement = this.shadowRoot.querySelector('.base');
+        this._phoneTurnOnElement = this.shadowRoot.getElementById('phone-turn-on');
+        this._phoneUnknownElement = this.shadowRoot.getElementById('phone-unknown');
+        this._phoneDeniedElement = this.shadowRoot.getElementById('phone-denied');
+        this._desktopTurnOnElement = this.shadowRoot.getElementById('desktop-turn-on');
+        this._desktopUnknownElement = this.shadowRoot.getElementById('desktop-unknown');
+        this._desktopDeniedElement = this.shadowRoot.getElementById('desktop-denied');
 
         // Bind functions
         this._turnOnClickEvent = this._turnOnClickEvent.bind(this);
@@ -42,7 +46,14 @@ export class StandUpWelcome extends HTMLElement {
     */
     connectedCallback() {
         // Add events
-        this._turnOnElement.addEventListener('click', this._turnOnClickEvent);
+        this._phoneTurnOnElement.addEventListener('click', this._turnOnClickEvent);
+        this._desktopTurnOnElement.addEventListener('click', this._turnOnClickEvent);
+
+        // Check URL search
+        if (window.location.search.includes('mode=app') === true) {
+            // Set "installed" attribute to base element
+            this._baseElement.setAttribute('installed', '');
+        }
 
         // Check the state
         this._checkState();
@@ -57,7 +68,8 @@ export class StandUpWelcome extends HTMLElement {
      */
     disconnectedCallback() {
         // Remove events
-        this._turnOnElement.removeEventListener('click', this._turnOnClickEvent);
+        this._phoneTurnOnElement.removeEventListener('click', this._turnOnClickEvent);
+        this._desktopTurnOnElement.removeEventListener('click', this._turnOnClickEvent);
 
         // Clear interval
         clearInterval(this._timerId);
@@ -94,8 +106,10 @@ export class StandUpWelcome extends HTMLElement {
         // If unknown
         if (state === 'unknown') {
             // Show the unknown text
-            this._unknownElement.style.display = 'grid';
-            this._deniedElement.style.display = 'none';
+            this._phoneUnknownElement.style.display = 'grid';
+            this._phoneDeniedElement.style.display = 'none';
+            this._desktopUnknownElement.style.display = 'grid';
+            this._desktopDeniedElement.style.display = 'none';
 
             // Set state flag
             this._state = 1;
@@ -104,8 +118,10 @@ export class StandUpWelcome extends HTMLElement {
         // If denied
         if (state === 'denied') {
             // Show the denied text
-            this._unknownElement.style.display = 'none';
-            this._deniedElement.style.display = 'grid';
+            this._phoneUnknownElement.style.display = 'none';
+            this._phoneDeniedElement.style.display = 'grid';
+            this._desktopUnknownElement.style.display = 'none';
+            this._desktopDeniedElement.style.display = 'grid';
 
             // Set state flag
             this._state = 2;

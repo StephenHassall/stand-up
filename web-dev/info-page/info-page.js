@@ -31,6 +31,21 @@ export class InfoPage extends HTMLElement {
         // Add CSS style sheet
         this.shadowRoot.adoptedStyleSheets = [InfoPage.uiCssStyleSheet];
     }
+
+    /**
+    * Override connectedCallback function to handle when component is attached into the DOM.
+    * @override
+    */
+    connectedCallback() {
+        // Get exit element
+        const exitElement = this.shadowRoot.getElementById('exit');
+
+        // Check URL search
+        if (window.location.search.includes('mode=app') === true) {
+            // Reset the href attribute
+            exitElement.setAttribute('href', '/?mode=app');
+        }
+    }
 }
 
 // Create the UI element

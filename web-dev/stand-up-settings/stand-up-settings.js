@@ -8,6 +8,7 @@ import "/node_modules/@coderundebug/ui-web/ui-label.js";
 import "/node_modules/@coderundebug/ui-web/ui-select.js";
 import UiTheme from "/node_modules/@coderundebug/ui-web/ui-theme.js";
 import "/node_modules/@coderundebug/ui-web/ui-checkbox.js";
+import { PwaTheme } from "../pwa-theme.js";
 import { StandUpControl } from "../stand-up-control.js";
 import { StandUpData } from "../stand-up-data.js";
 import { SystemNotification } from "../system-notification.js";
@@ -369,6 +370,9 @@ export class StandUpSettings extends HTMLElement {
 
         // Set the new theme
         UiTheme.switchPageTheme(file);
+
+        // Set starting PWA theme
+        PwaTheme.setPwaColorScheme();
     }
 
     /**

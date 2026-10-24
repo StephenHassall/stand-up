@@ -13,8 +13,15 @@ Fs.cpSync('./web-dev/node_modules/@coderundebug/ui-web', './web-live/node_module
 // Copy other files over
 Fs.cpSync('./web-dev/coderundebug.svg', './web-live/coderundebug.svg');
 Fs.cpSync('./web-dev/favicon.svg', './web-live/favicon.svg');
+Fs.cpSync('./web-dev/icon-144.png', './web-live/icon-144.png');
+Fs.cpSync('./web-dev/icon-180.png', './web-live/icon-180.png');
+Fs.cpSync('./web-dev/icon-192.png', './web-live/icon-192.png');
+Fs.cpSync('./web-dev/icon-512.png', './web-live/icon-512.png');
 Fs.cpSync('./web-dev/index.html', './web-live/index.html');
 Fs.cpSync('./web-dev/info.html', './web-live/info.html');
+Fs.cpSync('./web-dev/manifest.json', './web-live/manifest.json');
+Fs.cpSync('./web-dev/maskable-192.png', './web-live/maskable-192.png');
+Fs.cpSync('./web-dev/maskable-512.png', './web-live/maskable-512.png');
 Fs.cpSync('./web-dev/robots.txt', './web-live/robots.txt');
 Fs.cpSync('./web-dev/sit-down-icon.png', './web-live/sit-down-icon.png');
 Fs.cpSync('./web-dev/stand-up-icon.png', './web-live/stand-up-icon.png');
@@ -25,14 +32,21 @@ await BuildTools.compressCss('./web-dev/theme-light.css', './web-live/theme-ligh
 await BuildTools.compressCss('./web-dev/theme-serif.css', './web-live/theme-serif.css');
 await BuildTools.compressCss('./web-dev/theme-mono.css', './web-live/theme-mono.css');
 await BuildTools.compressJavaScript('./web-dev/page-notification.js', './web-live/page-notification.js');
+await BuildTools.compressJavaScript('./web-dev/pwa-theme.js', './web-live/pwa-theme.js');
 await BuildTools.compressJavaScript('./web-dev/stand-up-control.js', './web-live/stand-up-control.js');
 await BuildTools.compressJavaScript('./web-dev/stand-up-data.js', './web-live/stand-up-data.js');
+await BuildTools.compressJavaScript('./web-dev/sw.js', './web-live/sw.js');
 await BuildTools.compressJavaScript('./web-dev/system-notification.js', './web-live/system-notification.js');
+await BuildTools.compressJavaScript('./web-dev/timer-worker.js', './web-live/timer-worker.js');
 await BuildTools.compressJavaScript('./web-dev/web-site.js', './web-live/web-site.js');
 
 // Info page
 Fs.mkdirSync('./web-live/info-page', { recursive: true });
 await BuildTools.compressUiWebComponent('./web-dev/info-page/info-page.js', './web-live/info-page/');
+
+// PWA install page
+Fs.mkdirSync('./pwa-install/pwa-install', { recursive: true });
+await BuildTools.compressUiWebComponent('./web-dev/pwa-install/pwa-install.js', './web-live/pwa-install/');
 
 // Stand up app
 Fs.mkdirSync('./web-live/stand-up-app', { recursive: true });

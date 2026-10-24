@@ -10,7 +10,15 @@
 .views {
   display: grid;
   grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
   justify-items: center;
+}
+
+pwa-install {
+  width: 80vw;
+  max-width: 800px;
+  min-width: 400px;
+  margin-top: 1rem;
 }
 
 stand-up-welcome {

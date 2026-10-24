@@ -7,9 +7,11 @@ import "/node_modules/@coderundebug/ui-web/ui-icon-link-button.js";
 import "/node_modules/@coderundebug/ui-web/icon/ui-icon-question.js";
 import "/node_modules/@coderundebug/ui-web/icon/ui-icon-settings.js";
 import { PageNotification } from "../page-notification.js";
+import { PwaTheme } from "../pwa-theme.js";
 import { StandUpControl } from "../stand-up-control.js";
 import { StandUpData } from "../stand-up-data.js";
 import { SystemNotification } from "../system-notification.js";
+import "../pwa-install/pwa-install.js";
 import "../stand-up-settings/stand-up-settings.js";
 import "../stand-up-view/stand-up-view.js";
 import "../stand-up-welcome/stand-up-welcome.js";
@@ -22,6 +24,9 @@ StandUpData.loadState();
 StandUpControl.initialize();
 PageNotification.initialize();
 SystemNotification.initialize();
+
+// Set starting PWA theme
+PwaTheme.setPwaColorScheme();
 
 export class StandUpApp extends HTMLElement {
     /**
@@ -83,6 +88,15 @@ export class StandUpApp extends HTMLElement {
         else {
             // Show view
             this._showPage(StandUpApp.PAGE_VIEW);
+        }
+
+        // Get info element
+        const infoElement = this.shadowRoot.getElementById('info');
+
+        // Check URL search
+        if (window.location.search.includes('mode=app') === true) {
+            // Reset the href attribute
+            infoElement.setAttribute('href', '/info.html?mode=app');
         }
     }
 
